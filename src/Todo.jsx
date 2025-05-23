@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
 function Todo() {
-
+  let API=process.env.VITE_API_URL
   const [tasks, setTasks] = useState([])
   const[taskInput,setTaskInput]=useState("")
   const[editId,setEditId]=useState(false)
   const[editedTask,setEditedtask]=useState("")
   const getTask=()=>{
-    axios.get("http://localhost:3000/task")
+    axios.get(`${API}/task`)
     .then(res=>{
       console.log(res.data)
         setTasks(res.data.taskItems)
@@ -25,7 +25,7 @@ function Todo() {
   }
 
   const deleteTask=(index)=>{
-    axios.delete("http://localhost:3000/task/task/"+index)
+    axios.delete(`${API}/task/task/`+index)
     .then(res=>{
         getTask()
 
@@ -37,7 +37,7 @@ function Todo() {
 
   const formSubmitHandler=(e)=>{
     e.preventDefault()
-    axios.post("http://localhost:3000/task",{task:taskInput})
+    axios.post(`${API}/task`,{task:taskInput})
     .then(res=>{
       console.log(taskInput)
       setTaskInput(taskInput)
@@ -49,7 +49,7 @@ function Todo() {
     
   }
   const saveChanges=()=>{
-    axios.put(`http://localhost:3000/task/edit-task/${editId}`,{task:editedTask})
+    axios.put(`${API}/task/edit-task/${editId}`,{task:editedTask})
     .then(res=>{
       setEditId()
       console.log(editedTask)
