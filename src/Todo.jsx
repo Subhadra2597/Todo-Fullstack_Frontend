@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
+//const dotenv= require("dotenv")
+let API=import.meta.env.VITE_API_URL
+//dotenv.config("./env")
 function Todo() {
-  let API=process.env.VITE_API_URL
   const [tasks, setTasks] = useState([])
   const[taskInput,setTaskInput]=useState("")
   const[editId,setEditId]=useState(false)
